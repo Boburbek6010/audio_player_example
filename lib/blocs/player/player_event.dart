@@ -1,12 +1,13 @@
+import 'package:audio_player_example/data/models/audiobook_model.dart';
+
+
 abstract class PlayerEvent {}
 
 class PlayAudio extends PlayerEvent {
-  final String audioUrl;
+  final AudiobookModel audiobook;
 
-  PlayAudio(this.audioUrl);
+  PlayAudio(this.audiobook);
 }
-
-class PauseAudio extends PlayerEvent {}
 
 class NextAudio extends PlayerEvent {}
 
@@ -22,3 +23,14 @@ class SeekAudio extends PlayerEvent {
   SeekAudio(this.position);
 }
 
+class PauseAudio extends PlayerEvent {}
+
+class StopAudio extends PlayerEvent {}
+
+class ShufflePlaylist extends PlayerEvent {}
+
+class UpdatePlaylist extends PlayerEvent {
+  final List<AudiobookModel> playlist;
+
+  UpdatePlaylist(this.playlist);
+}

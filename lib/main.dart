@@ -10,18 +10,17 @@ import 'data/data_sources/remote_data_source.dart';
 import 'services/audio_service.dart' as audio;
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     final audiobookRepository = AudiobookRepository(Dio());
-
     final audioHandler = audio.AudioHandler();
-
     final remoteDataSource = RemoteDataSource(audiobookRepository);
-
     final playlistRepository = PlaylistRepository();
 
     return MultiBlocProvider(

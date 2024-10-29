@@ -16,10 +16,10 @@ class PlaylistBloc extends Bloc<PlaylistEvent, PlaylistState> {
       final playlist = audioHandler.playlist;
       yield PlaylistLoaded(playlist);
     } else if (event is AddToPlaylist) {
-      audioHandler.setPlaylist([...audioHandler.playlist, event.audioUrl]);
+      audioHandler.setPlaylist([...audioHandler.playlist, event.audiobookModel]);
       yield PlaylistUpdated(audioHandler.playlist);
     } else if (event is RemoveFromPlaylist) {
-      audioHandler.setPlaylist(audioHandler.playlist.where((url) => url != event.audioUrl).toList());
+      audioHandler.setPlaylist(audioHandler.playlist.where((url) => url != event.audiobookModel).toList());
       yield PlaylistUpdated(audioHandler.playlist);
     } else if (event is ReorderPlaylist) {
       final item = audioHandler.playlist.removeAt(event.oldIndex);

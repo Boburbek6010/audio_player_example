@@ -14,7 +14,7 @@ class PlayerBloc extends Bloc<PlayerEvent, PlayerState> {
   @override
   Stream<PlayerState> mapEventToState(PlayerEvent event) async* {
     if (event is PlayAudio) {
-      audioHandler.setPlaylist([event.audioUrl]);
+      audioHandler.setPlaylist([event.audiobook]);
       await audioHandler.play();
       yield PlayerPlaying();
     } else if (event is PauseAudio) {

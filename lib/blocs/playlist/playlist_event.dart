@@ -1,15 +1,17 @@
+import 'package:audio_player_example/data/models/audiobook_model.dart';
+
 abstract class PlaylistEvent {}
 
 class AddToPlaylist extends PlaylistEvent {
-  final String audioUrl;
+  final AudiobookModel audiobookModel;
 
-  AddToPlaylist(this.audioUrl);
+  AddToPlaylist(this.audiobookModel);
 }
 
 class RemoveFromPlaylist extends PlaylistEvent {
-  final String audioUrl;
+  final AudiobookModel audiobookModel;
 
-  RemoveFromPlaylist(this.audioUrl);
+  RemoveFromPlaylist(this.audiobookModel);
 }
 
 class ReorderPlaylist extends PlaylistEvent {
