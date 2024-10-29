@@ -9,9 +9,12 @@ class AudioHandler extends BaseAudioHandler {
   final AudioPlayer _audioPlayer = AudioPlayer();
   List<AudiobookModel> _playlist = [];
   int _currentIndex = 0;
-  final PlayerBloc playerBloc;
+  PlayerBloc? playerBloc;
 
-  AudioHandler() :playerBloc = PlayerBloc(AudioHandler()) {
+  AudioHandler();
+
+  void initialize(PlayerBloc playerBloc) {
+    this.playerBloc = playerBloc;
     _audioPlayer.currentIndexStream.listen((index) {
       _currentIndex = index ?? 0;
     });
@@ -31,7 +34,7 @@ class AudioHandler extends BaseAudioHandler {
 
       await _audioPlayer.setUrl(currentUrl);
       _audioPlayer.play();
-      playerBloc.add(PlayAudio(currentAudiobook));
+      playerBloc?.add(PlayAudio(currentAudiobook));
     }
   }
 
@@ -39,7 +42,7 @@ class AudioHandler extends BaseAudioHandler {
   @override
   Future<void> pause() async {
     await _audioPlayer.pause();
-    playerBloc.add(PauseAudio());
+    playerBloc?.add(PauseAudio());
   }
 
   Future<void> next() async {
@@ -58,7 +61,7 @@ class AudioHandler extends BaseAudioHandler {
 
   void toggleShuffle() {
     _playlist.shuffle();
-    playerBloc.add(ShufflePlaylist());
+    playerBloc?.add(ShufflePlaylist());
   }
 
   @override
@@ -78,11 +81,11 @@ class AudioHandler extends BaseAudioHandler {
   @override
   Future<void> stop() async {
     await _audioPlayer.stop();
-    playerBloc.add(StopAudio());
+    playerBloc?.add(StopAudio());
   }
 
   void setPlaylist(List<AudiobookModel> playlist) {
     _playlist = playlist;
-    playerBloc.add(UpdatePlaylist(playlist));
+    playerBloc?.add(UpdatePlaylist(playlist));
   }
 }

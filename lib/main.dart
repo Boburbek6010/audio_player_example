@@ -1,3 +1,4 @@
+import 'package:audio_player_example/view/screens/audiobook_list_screen.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,19 +20,24 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final audiobookRepository = AudiobookRepository(Dio());
-    final audioHandler = audio.AudioHandler();
     final remoteDataSource = RemoteDataSource(audiobookRepository);
     final playlistRepository = PlaylistRepository();
+
+    final audioHandler = audio.AudioHandler();
+    final playerBloc = PlayerBloc(audioHandler);
+
+    audioHandler.initialize(playerBloc);
 
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (_) => AudiobookBloc(audiobookRepository)),
-        BlocProvider(create: (_) => PlayerBloc(audioHandler)),
-        BlocProvider(create: (_) => PlaylistBloc(audioHandler)),
+        BlocProvider(create: (_) => playerBloc),
+        BlocProvider(create: (_) => PlaylistBloc(playlistRepository)),
       ],
       child: MaterialApp(
         title: 'Audiobook Player',
         theme: ThemeData(primarySwatch: Colors.blue),
+        home: const AudiobookListScreen(),
       ),
     );
   }

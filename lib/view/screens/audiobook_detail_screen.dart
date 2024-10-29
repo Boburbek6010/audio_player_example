@@ -7,7 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class AudiobookDetailScreen extends StatelessWidget {
   final AudiobookModel audiobook;
 
-  const AudiobookDetailScreen(this.audiobook);
+  const AudiobookDetailScreen(this.audiobook, {super.key});
 
   @override
   Widget build(BuildContext context) {

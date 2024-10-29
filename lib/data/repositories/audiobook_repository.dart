@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 
 import '../../utils/constants.dart';
@@ -10,6 +12,7 @@ class AudiobookRepository {
 
   Future<List<AudiobookModel>> fetchAudiobooks() async {
     final response = await dio.get('${Constants.baseUrl}${Constants.audiobookListEndpoint}');
+    log(response.toString());
     final List<AudiobookModel> audiobooks = (response.data['books'] as List).map((json) => AudiobookModel.fromJson(json)).toList();
     return audiobooks;
   }

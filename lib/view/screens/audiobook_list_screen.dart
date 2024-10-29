@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import '../../blocs/audiobook/audiobook_bloc.dart';
 import '../../blocs/audiobook/audiobook_state.dart';
@@ -22,6 +24,7 @@ class AudiobookListScreen extends StatelessWidget {
               itemCount: audiobooks.length,
               itemBuilder: (context, index) {
                 final audiobook = audiobooks[index];
+                log(audiobook.audioUrl);
                 return AudiobookCard(
                   audiobook: audiobook,
                   onTap: () {
@@ -35,8 +38,12 @@ class AudiobookListScreen extends StatelessWidget {
                 );
               },
             );
+          } else if(state is AudiobookInitial){
+            log("message");
+            return SizedBox.shrink();
+
           } else {
-            return Center(child: Text('Failed to load audiobooks.'));
+            return const Center(child: Text('Failed to load audiobooks.'));
           }
         },
       ),
