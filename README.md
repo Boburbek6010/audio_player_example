@@ -1,11 +1,14 @@
-# Audio Book
+# Audiobook Player
 
-## A new Flutter project for UIC
+## A New Flutter Project for UIC
+
+This project is a Flutter application designed to provide a seamless experience for audiobook playback, featuring an organized folder structure following the principles of clean architecture and state management using BLoC.
 
 ## Getting Started
 
-### Folder Structure:
+### Folder Structure
 
+```plaintext
 lib/
 ├── blocs/
 │   ├── audiobook/
@@ -49,5 +52,3 @@ lib/
 │   ├── constants.dart
 │   └── helpers.dart
 └── main.dart
-
-This project is a starting point for a Flutter application.
