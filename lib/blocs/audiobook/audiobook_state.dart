@@ -1,6 +1,19 @@
-part of 'audiobook_bloc.dart';
+import '../../data/models/audiobook_model.dart';
 
-@immutable
-sealed class AudiobookState {}
+abstract class AudiobookState {}
 
-final class AudiobookInitial extends AudiobookState {}
+class AudiobookInitial extends AudiobookState {}
+
+class AudiobookLoading extends AudiobookState {}
+
+class AudiobookLoaded extends AudiobookState {
+  final List<AudiobookModel> audiobooks;
+
+  AudiobookLoaded(this.audiobooks);
+}
+
+class AudiobookError extends AudiobookState {
+  final String message;
+
+  AudiobookError(this.message);
+}

@@ -1,4 +1,3 @@
-part of 'audiobook_bloc.dart';
+abstract class AudiobookEvent {}
 
-@immutable
-sealed class AudiobookEvent {}
+class FetchAudiobooks extends AudiobookEvent {}
